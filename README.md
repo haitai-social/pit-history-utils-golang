@@ -3,27 +3,27 @@
 [![Go Version](https://img.shields.io/badge/Go-1.22+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-一个用于管理和导出 Haitai 社区 IDE 历史记录片段的 Go 工具库。
+A Golang utility library for managing and exporting Haitai Community IDE chat history fragments.
 
-## 功能特性
+## Features
 
-- 🔧 **完整类型定义**: 基于 Go 的强类型系统，提供完整的类型定义
-- 📦 **数据验证**: 内置严格的数据验证机制
-- 🔄 **版本管理**: 支持历史数据的版本兼容性
-- 🎯 **选择管理**: 支持选择/取消选择聊天记录
-- ✏️ **内容编辑**: 支持编辑聊天名称和 IDE 名称
-- ➕ **历史添加**: 支持添加新的聊天历史记录
-- 📤 **数据导出**: 支持导出选中的聊天历史为标准格式
+- 🔧 **Comprehensive Type Definitions**: Leverages Go's strong typing to ensure complete type safety
+- 📦 **Data Validation**: Strict built-in data validation
+- 🔄 **Versioning**: Supports compatible versions for history data
+- 🎯 **Selection Management**: Select/unselect chat records
+- ✏️ **Content Editing**: Edit chat names and IDE name
+- ➕ **Add History**: Append new chat records
+- 📤 **Export Data**: Export selected chat history into a standard format
 
-## 安装
+## Installation
 
 ```bash
 go get github.com/haitai-social/pit-history-utils-golang
 ```
 
-## 快速开始
+## Quick Start
 
-### 基本使用
+### Basic Usage
 
 ```go
 package main
@@ -37,7 +37,7 @@ import (
 )
 
 func main() {
-    // 从 JSON 字符串创建历史记录模型
+    // Create a history model from a JSON string
     jsonData := `{
         "ide_name": "cursor",
         "chat_list": [
@@ -61,20 +61,20 @@ func main() {
         log.Fatal(err)
     }
 
-    // 编辑 IDE 名称
+    // Edit the IDE name
     history.EditIDEName(types.IDENameCursor)
 
-    // 取消选择第一条聊天记录
+    // Unselect the first chat record
     if err := history.UnselectChatAtIndex(0); err != nil {
         log.Fatal(err)
     }
 
-    // 编辑聊天名称
+    // Edit the name of the second chat
     if err := history.EditNameAtIndex(1, "AI Assistant"); err != nil {
         log.Fatal(err)
     }
 
-    // 添加新的聊天记录
+    // Append a new chat record
     newChat := &types.SingleChat{
         Role:     types.RoleUser,
         Name:     "User",
@@ -85,7 +85,7 @@ func main() {
         log.Fatal(err)
     }
 
-    // 导出选中的聊天历史
+    // Export the selected chat history
     exportedData, err := history.ToJSON()
     if err != nil {
         log.Fatal(err)
@@ -94,10 +94,10 @@ func main() {
 }
 ```
 
-### 处理带版本的数据
+### Handling Versioned Data
 
 ```go
-// 处理 v1 版本数据
+// Handling v1 version data
 v1JsonData := `{
     "version": "v1",
     "content": {
@@ -118,75 +118,78 @@ if err != nil {
 }
 ```
 
-## API 文档
+## API Documentation
 
 ### VibeHistoryModel
 
-主要的历史记录管理类。
+The main history management model.
 
-#### 静态方法
+#### Static Methods
 
 ##### `FromJSON(input string) (*VibeHistoryModel, error)`
-解析 JSON 字符串并创建历史记录模型实例。
+Parse a JSON string and create an instance of the history model.
 
-**参数:**
-- `input string` - JSON 格式的历史数据字符串
+**Params:**
+- `input string` - History data as JSON string
 
-**返回值:** `*VibeHistoryModel` 实例和可能的错误
+**Returns:** an instance of `*VibeHistoryModel` and any possible error
 
-**错误:**
-- JSON 解析失败时返回错误
-- 数据结构不正确时返回错误
+**Errors:**
+- Returns an error if JSON parsing fails
+- Returns an error if the data structure is invalid
 
-#### 实例方法
+#### Instance Methods
 
 ##### `UnselectChatAtIndex(index int) error`
-取消选择指定索引的聊天记录。
+Unselect the chat record at the specified index.
 
 ##### `SelectChatAtIndex(index int) error`
-选择指定索引的聊天记录。
+Select the chat record at the specified index.
 
 ##### `EditNameAtIndex(index int, newName string) error`
-编辑指定索引的聊天记录名称。
+Edit the name of the chat record at the specified index.
 
 ##### `EditIDEName(newName types.IDENameEnum)`
-编辑 IDE 名称。
+Edit the IDE name.
 
 ##### `AppendChatHistory(chat *types.SingleChat) error`
-在历史列表末尾添加新的聊天记录。
+Append a new chat record to the end of the list.
 
 ##### `ToJSON() (string, error)`
-导出选中的聊天历史为 v1 格式 JSON 数据。
+Export selected chat records as a v1 format JSON string.
 
-**返回值:** 导出的历史数据（包含版本信息和过滤后的聊天列表）
+**Return:** The exported history data (including version info and filtered chat list)
 
-## 类型定义
+## Type Definitions
 
 ### SingleChat
-单条聊天记录的类型定义：
+
+Definition of a single chat record:
 
 ```go
 type SingleChat struct {
-    Role     RoleEnum `json:"role"`       // 角色（如 "user", "assistant"）
-    Name     string   `json:"name"`       // 聊天名称
-    Content  string   `json:"content"`    // 聊天内容
-    IsSelect bool     `json:"is_select"`  // 是否选中（仅供内部使用）
+    Role     RoleEnum `json:"role"`      // Role (e.g. "user", "assistant")
+    Name     string   `json:"name"`      // Chat name
+    Content  string   `json:"content"`   // Chat content
+    IsSelect bool     `json:"is_select"` // Whether selected (used internally)
 }
 ```
 
 ### VibeHistoryContent
-历史内容的主要结构：
+
+Main structure for history content:
 
 ```go
 type VibeHistoryContent struct {
-    IDEName  IDENameEnum   `json:"ide_name"`   // IDE 名称
-    ChatList []*SingleChat `json:"chat_list"`  // 聊天记录列表
+    IDEName  IDENameEnum   `json:"ide_name"`  // IDE name
+    ChatList []*SingleChat `json:"chat_list"` // List of chat records
 }
 ```
 
-### 枚举类型
+### Enum Types
 
 #### RoleEnum
+
 ```go
 const (
     RoleUser      RoleEnum = "user"
@@ -196,6 +199,7 @@ const (
 ```
 
 #### IDENameEnum
+
 ```go
 const (
     IDENameCursor     IDENameEnum = "cursor"
@@ -206,74 +210,74 @@ const (
 )
 ```
 
-## 数据验证
+## Data Validation
 
-本库内置了严格的数据验证机制，确保：
+This library has strict built-in data validation to guarantee:
 
-- 所有必需字段都存在
-- 数据类型正确
-- 字符串字段非空（适当时）
-- 数组结构正确
-- 枚举值有效
+- All required fields are present
+- Data types are correct
+- String fields are not empty (where appropriate)
+- Array structures are correct
+- Enum values are valid
 
-## 错误处理
+## Error Handling
 
-本库返回以下类型的错误：
+This library returns the following error types:
 
-- `ValidationError` - 参数验证失败
-- `IndexError` - 索引超出范围
-- `EmptyStringError` - 字符串为空
-- 标准错误 - JSON 解析失败或数据结构不匹配
+- `ValidationError` - Parameter validation failed
+- `IndexError` - Index out of range
+- `EmptyStringError` - Empty string encountered
+- Standard errors - e.g. JSON parsing failed or data structure mismatch
 
-## 开发
+## Development
 
-### 构建项目
+### Build the Project
 
 ```bash
 go build ./...
 ```
 
-### 运行测试
+### Run Tests
 
 ```bash
 go test ./...
 ```
 
-### 格式化代码
+### Format Code
 
 ```bash
 go fmt ./...
 ```
 
-## 相关项目
+## Related Projects
 
-- [pit-history-utils-typescript](https://github.com/haitai-social/pit-history-utils-typescript) - TypeScript 版本
+- [pit-history-utils-typescript](https://github.com/haitai-social/pit-history-utils-typescript) - TypeScript version
 - [Haitai Community IDE](https://github.com/haitai-social/community-ide)
 - [Model Context Protocol](https://github.com/modelcontextprotocol)
 
-## 贡献
+## Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Contributions via issue or pull request are welcome!
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建 Pull Request
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to your branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
 
-## 许可证
+## License
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 作者
+## Author
 
 **haitai-social** - [GitHub](https://github.com/haitai-social)
 
-## 支持
+## Support
 
-如果您在使用本库时遇到任何问题：
+If you encounter any problems using this library:
 
-1. 查看 [Issues](https://github.com/haitai-social/pit-history-utils-golang/issues) 页面
-2. 创建新 Issue 描述您的问题
-3. 提供相关的代码示例和错误信息
+1. Check the [Issues](https://github.com/haitai-social/pit-history-utils-golang/issues) page
+2. Create a new issue describing your problem
+3. Provide relevant code samples and error details
 
