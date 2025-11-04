@@ -1,0 +1,21 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+- `File names`: Lowercase letters + underscores. For example: user_service.go, main.go, utility_functions_test.go. File names should use only lowercase letters with words separated by underscores _. Test files should end with _test.go;
+- `Folder names`: Use lowercase singular words, such as utils, models, handlers. Folder (package) names are usually brief, singular, and lowercase. Avoid using underscores or camel case.
+- `Variables`: 
+  - Unexported (package-private) variables use lower camel case, e.g. userName, httpClient.
+  - Exported (public) variables use upper camel case, e.g. UserName, HTTPClient. Abbreviations like HTTP, API should be all uppercase when exported.
+  - For small scopes (like loops or function parameters), concise, meaningful names are encouraged, e.g. i, j, r, w.
+- `Structs`: Struct type names use upper camel case, e.g. User, ProductOrder.
+- `Struct fields`: 
+  - Unexported (private) fields use lower camel case, e.g. id, firstName.
+  - Exported (public) fields use upper camel case, e.g. ID, EmailAddress. Abbreviations like ID, URL should be all uppercase when exported.
+- `Functions/methods`: 
+  - Unexported (private) functions or methods use lower camel case, e.g. getUserData().
+  - Exported (public) functions or methods use upper camel case, e.g. GetUserData(), ParseURL(). Abbreviations like URL remain fully capitalized when exported.
+- `Constants`: Constants typically use upper camel case, e.g. MaxConnections, DefaultTimeout. For related constant groups, iota can be used.
+- `Interfaces`: Interface types use upper camel case, often ending in er, e.g. Reader, Writer, Closer, UserService. If the interface has only one method, its name usually ends with er after the method name; if the interface includes multiple methods or responsibilities, use a descriptive upper camel case name.
