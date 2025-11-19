@@ -4,11 +4,13 @@ package types
 type IDENameEnum string
 
 const (
-	IDENameCursor     IDENameEnum = "cursor"
-	IDENameClaudeCode IDENameEnum = "claude code"
-	IDENameTrea       IDENameEnum = "trea"
-	IDENameWinsurf    IDENameEnum = "winsurf"
-	IDENameCodex      IDENameEnum = "codex"
+	IDENameCursor      IDENameEnum = "cursor"
+	IDENameClaudeCode  IDENameEnum = "claude code"
+	IDENameTrea        IDENameEnum = "trea"
+	IDENameWinsurf     IDENameEnum = "winsurf"
+	IDENameCodex       IDENameEnum = "codex"
+	IDENameKiro        IDENameEnum = "kiro"
+	IDENameAntigravity IDENameEnum = "antigravity"
 )
 
 // VibeHistoryContent 历史记录内容结构
@@ -29,7 +31,9 @@ func NewVibeHistoryContent() *VibeHistoryContent {
 func (v *VibeHistoryContent) Validate() error {
 	// 验证 IDE 名称是否有效
 	switch v.IDEName {
-	case IDENameCursor, IDENameClaudeCode, IDENameTrea, IDENameWinsurf, IDENameCodex:
+	case IDENameCursor, IDENameClaudeCode,
+		IDENameTrea, IDENameWinsurf, IDENameCodex,
+		IDENameKiro, IDENameAntigravity:
 		// 有效 IDE 名称
 	default:
 		return &ValidationError{Field: "ide_name", Message: "invalid ide_name value"}
