@@ -36,7 +36,7 @@ func main() {
 	fmt.Println("=== 示例 1: 基本操作 ===")
 
 	// 编辑 IDE 名称
-	history.EditIDEName(types.IDENameCursor)
+	history.EditIDEName("cursor")
 	fmt.Println("已设置 IDE 名称为: cursor")
 
 	// 取消选择第一条聊天记录
@@ -99,7 +99,7 @@ func main() {
 	// 示例 3: 创建新的历史记录
 	fmt.Println("\n=== 示例 3: 创建新的历史记录 ===")
 	content := types.NewVibeHistoryContent()
-	content.IDEName = types.IDENameCursor
+	content.IDEName = "cursor"
 
 	// 添加聊天记录
 	chat1 := &types.SingleChat{

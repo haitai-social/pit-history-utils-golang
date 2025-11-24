@@ -34,8 +34,7 @@ pit-history-utils-golang/
   - `Validate()`: 验证数据有效性
 
 - **vibe_history_content.go**: 历史内容的结构和验证
-  - `IDENameEnum`: IDE 名称枚举
-  - `VibeHistoryContent`: 历史内容结构
+  - `VibeHistoryContent`: 历史内容结构 (IDEName 字段为 string 类型)
   - `NewVibeHistoryContent()`: 创建默认历史内容
   - `Validate()`: 验证数据有效性
 

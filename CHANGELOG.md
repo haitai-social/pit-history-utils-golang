@@ -21,7 +21,7 @@
   - `SingleChat` - 单条聊天记录
   - `VibeHistoryContent` - 历史内容结构
   - `RoleEnum` - 角色枚举（user, assistant, tool）
-  - `IDENameEnum` - IDE 名称枚举（cursor, claude code, trea, winsurf, codex）
+  - IDE 名称字段现在使用 string 类型，支持任意 IDE 名称
 - 错误类型：
   - `ValidationError` - 验证错误
   - `IndexError` - 索引错误

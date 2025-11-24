@@ -25,7 +25,7 @@ func TestFromJSON_BasicData(t *testing.T) {
 		t.Fatalf("FromJSON failed: %v", err)
 	}
 
-	if history.Content.IDEName != types.IDENameCursor {
+	if history.Content.IDEName != "cursor" {
 		t.Errorf("Expected IDE name 'cursor', got '%s'", history.Content.IDEName)
 	}
 
@@ -54,7 +54,7 @@ func TestFromJSON_VersionedData(t *testing.T) {
 		t.Fatalf("FromJSON failed: %v", err)
 	}
 
-	if history.Content.IDEName != types.IDENameCursor {
+	if history.Content.IDEName != "cursor" {
 		t.Errorf("Expected IDE name 'cursor', got '%s'", history.Content.IDEName)
 	}
 }
@@ -147,9 +147,9 @@ func TestEditIDEName(t *testing.T) {
 	content := types.NewVibeHistoryContent()
 	history := NewVibeHistoryModel(content)
 
-	history.EditIDEName(types.IDENameWinsurf)
+	history.EditIDEName("winsurf")
 
-	if history.Content.IDEName != types.IDENameWinsurf {
+	if history.Content.IDEName != "winsurf" {
 		t.Errorf("Expected IDE name 'winsurf', got '%s'", history.Content.IDEName)
 	}
 }

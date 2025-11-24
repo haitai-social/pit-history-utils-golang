@@ -31,7 +31,7 @@ type exportedSingleChat struct {
 type exportedVibeHistoryV1 struct {
 	Version string `json:"version"`
 	Content struct {
-		IDEName  types.IDENameEnum     `json:"ide_name"`
+		IDEName  string                `json:"ide_name"`
 		ChatList []*exportedSingleChat `json:"chat_list"`
 	} `json:"content"`
 }
@@ -131,7 +131,7 @@ func (v *VibeHistoryModel) EditNameAtIndex(index int, newName string) error {
 }
 
 // EditIDEName 编辑 IDE 名称
-func (v *VibeHistoryModel) EditIDEName(newName types.IDENameEnum) {
+func (v *VibeHistoryModel) EditIDEName(newName string) {
 	v.Content.IDEName = newName
 }
 

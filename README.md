@@ -62,7 +62,7 @@ func main() {
     }
 
     // Edit the IDE name
-    history.EditIDEName(types.IDENameCursor)
+    history.EditIDEName("cursor")
 
     // Unselect the first chat record
     if err := history.UnselectChatAtIndex(0); err != nil {
@@ -149,7 +149,7 @@ Select the chat record at the specified index.
 ##### `EditNameAtIndex(index int, newName string) error`
 Edit the name of the chat record at the specified index.
 
-##### `EditIDEName(newName types.IDENameEnum)`
+##### `EditIDEName(newName string)`
 Edit the IDE name.
 
 ##### `AppendChatHistory(chat *types.SingleChat) error`
@@ -181,7 +181,7 @@ Main structure for history content:
 
 ```go
 type VibeHistoryContent struct {
-    IDEName  IDENameEnum   `json:"ide_name"`  // IDE name
+    IDEName  string        `json:"ide_name"`  // IDE name
     ChatList []*SingleChat `json:"chat_list"` // List of chat records
 }
 ```
@@ -198,17 +198,6 @@ const (
 )
 ```
 
-#### IDENameEnum
-
-```go
-const (
-    IDENameCursor     IDENameEnum = "cursor"
-    IDENameClaudeCode IDENameEnum = "claude code"
-    IDENameTrea       IDENameEnum = "trea"
-    IDENameWinsurf    IDENameEnum = "winsurf"
-    IDENameCodex      IDENameEnum = "codex"
-)
-```
 
 ## Data Validation
 
